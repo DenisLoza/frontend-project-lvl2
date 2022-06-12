@@ -20,10 +20,10 @@ jobs:
     # Делаем checkout текущей ветки
     - uses: actions/checkout@v2
     # Устанавливаем Node.JS для сборки приложения
-    - name: Use Node.js
+    - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v2
       with:
-        node-version: '16.x'
+        node-version: ${{ matrix.node-version }}
         # Активируем cache для npm пакетов (для ускорения)
         cache: 'npm'
     # Run install project

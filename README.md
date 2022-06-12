@@ -41,6 +41,25 @@ Options:
   -f, --format <type>  output format
   -h, --help           output usage information  
 ```
+#### 🧪 Tests & Coverage
+
+1) Run linter:
+
+```sh
+make lint
+```
+
+2) Run test:
+
+```sh
+make test
+```
+
+3) Get test coverage:
+
+```sh
+make test-coverage
+```
 
 ## Asciinemas:
 ### display help and gendiff function work with flat files
