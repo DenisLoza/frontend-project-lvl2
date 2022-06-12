@@ -37,3 +37,12 @@ jobs:
     - name: Run linter
       run: |
         make lint
+    # Uses Codeclimate at https://github.com/paambaati/codeclimate-action
+    # https://github.com/marketplace/actions/code-climate-coverage-action    
+    - name: Test & publish code coverage
+      uses:  paambaati/codeclimate-action@v3.0.0
+      env:
+          CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
+      with:
+          coverageCommand: make test-coverage
+          debug: true
