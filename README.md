@@ -1,6 +1,6 @@
 ### Hexlet tests and linter status:
 [![Actions Status](https://github.com/DenisLoza/frontend-project-lvl2/workflows/hexlet-check/badge.svg)](https://github.com/DenisLoza/frontend-project-lvl2/actions/workflows/hexlet-check.yml)
-[![Node CI](https://github.com/DenisLoza/frontend-project-lvl2/actions/workflows/CI-tests/badge.svg)](https://github.com/DenisLoza/frontend-project-lvl2/actions/workflows/CI-tests.yml)
+[![Node CI](https://github.com/DenisLoza/frontend-project-lvl2/actions/workflows/CI-tests.yml/badge.svg)](https://github.com/DenisLoza/frontend-project-lvl2/actions/workflows/CI-tests.yml)
 
 ## Description:
 
