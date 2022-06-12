@@ -1,0 +1,39 @@
+name: CI-tests
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [16.x]
+        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
+
+    steps:
+    # Делаем checkout текущей ветки
+    - uses: actions/checkout@v2
+    # Устанавливаем Node.JS для сборки приложения
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v2
+      with:
+        node-version: ${{ matrix.node-version }}
+        # Активируем cache для npm пакетов (для ускорения)
+        cache: 'npm'
+    # Run install project
+    - name: npm install
+      run: |
+        make install
+      # Add environment variables
+      env:
+        CI: true
+    # Run Linter
+    - name: Run linter
+      run: |
+        make lint

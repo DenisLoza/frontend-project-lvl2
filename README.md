@@ -1,5 +1,6 @@
 ### Hexlet tests and linter status:
 [![Actions Status](https://github.com/DenisLoza/frontend-project-lvl2/workflows/hexlet-check/badge.svg)](https://github.com/DenisLoza/frontend-project-lvl2/actions/workflows/hexlet-check.yml)
+[![Node CI](https://github.com/DenisLoza/frontend-project-lvl2/actions/workflows/CI-tests/badge.svg)](https://github.com/DenisLoza/frontend-project-lvl2/actions/workflows/CI-tests.yml)
 
 ## Description:
 
@@ -25,7 +26,7 @@ make install
 make link
 ```
 
-#### 👩🏻‍💻 Usage
+### 👩🏻‍💻 Usage
 
 ```sh
 Usage: gendiff [options] <filepath1> <filepath2>
@@ -39,5 +40,5 @@ Options:
 ```
 
 ## Asciinemas:
-### display help and gendiff wit flat files
+### display help and gendiff function work with flat files
 [![asciicast](https://asciinema.org/a/6MLuvd5Gj2VTDuiZ4Otm6ivn4.svg)](https://asciinema.org/a/6MLuvd5Gj2VTDuiZ4Otm6ivn4)
