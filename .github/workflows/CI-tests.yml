@@ -20,10 +20,10 @@ jobs:
     # Делаем checkout текущей ветки
     - uses: actions/checkout@v2
     # Устанавливаем Node.JS для сборки приложения
-    - name: Use Node.js ${{ matrix.node-version }}
+    - name: Use Node.js
       uses: actions/setup-node@v2
       with:
-        node-version: ${{ matrix.node-version }}
+        node-version: '16.x'
         # Активируем cache для npm пакетов (для ускорения)
         cache: 'npm'
     # Run install project
@@ -40,7 +40,7 @@ jobs:
     # Uses Codeclimate at https://github.com/paambaati/codeclimate-action
     # https://github.com/marketplace/actions/code-climate-coverage-action    
     - name: Test & publish code coverage
-      uses:  paambaati/codeclimate-action@v3.0.0
+      uses:  paambaati/codeclimate-action@v2.5.7
       env:
           CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
       with:
