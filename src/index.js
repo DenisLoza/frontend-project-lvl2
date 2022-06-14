@@ -1,14 +1,14 @@
 import _ from 'lodash';
-import readFile from './readFile.js';
-import parse from './parse.js';
+import { readFile, getFormat } from './utils.js';
+import parsers from './parsers.js';
 
 const genDiff = (filepath1, filepath2) => {
   // получение содержимого файлов в виде строки
   const readFile1 = readFile(filepath1);
   const readFile2 = readFile(filepath2);
-  // преобразование полученных строк в объекты
-  const file1 = parse(readFile1);
-  const file2 = parse(readFile2);
+  // преобразование полученных строк в объекты с учетом формата файла
+  const file1 = parsers(readFile1, getFormat(filepath1));
+  const file2 = parsers(readFile2, getFormat(filepath2));
   // Массив ключей каждого объекта
   const keys1 = Object.keys(file1);
   const keys2 = Object.keys(file2);

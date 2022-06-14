@@ -41,7 +41,7 @@ Options:
   -f, --format <type>  output format
   -h, --help           output usage information  
 ```
-#### 🧪 Tests & Coverage
+### 🧪 Tests & Coverage
 
 1) Run linter:
 
@@ -62,5 +62,5 @@ make test-coverage
 ```
 
 ## Asciinemas:
-### display help and gendiff function work with flat files
-[![asciicast](https://asciinema.org/a/6MLuvd5Gj2VTDuiZ4Otm6ivn4.svg)](https://asciinema.org/a/6MLuvd5Gj2VTDuiZ4Otm6ivn4)
+### display help and gendiff function work with flat files (.json, .yml, .yaml)
+[![asciicast](https://asciinema.org/a/sfUkqoPoGjiB6zoVv7sUSVVjz.svg)](https://asciinema.org/a/sfUkqoPoGjiB6zoVv7sUSVVjz)

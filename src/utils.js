@@ -4,6 +4,7 @@ import { fileURLToPath } from 'url';
 
 // Модуль получает имя файла, подставляет правильный путь
 // и отдает содержимое данного файла.
+// Также Определяет расширение файла.
 
 // получение абсолютного пути к текущему файлу
 const __filename = fileURLToPath(import.meta.url);
@@ -14,5 +15,7 @@ const __dirname = dirname(__filename);
 const getFixturePath = (filename) => resolve(__dirname, '..', '__fixtures__', filename);
 // получаем данные(в виде строки) из файла по указанному пути
 const readFile = (filename) => readFileSync(getFixturePath(filename), 'utf-8');
+// получаем формат файла по его расширению
+const getFormat = (filename) => filename.split('.')[1];
 
-export default readFile;
+export { getFormat, readFile };
