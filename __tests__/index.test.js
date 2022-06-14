@@ -1,7 +1,7 @@
 import { readFile } from '../src/utils.js';
 import genDiff from '../src/index.js';
 
-const expectedOutput = readFile('flatOutput.txt');
+const expectedOutput = readFile('stylishOutput.txt');
 
 test('gendiff test .json', () => {
   expect(genDiff('file1.json', 'file2.json')).toEqual(expectedOutput);

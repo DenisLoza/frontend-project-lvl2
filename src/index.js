@@ -1,6 +1,7 @@
-import _ from 'lodash';
 import { readFile, getFormat } from './utils.js';
 import parsers from './parsers.js';
+import genTree from './genTree.js';
+import stylish from './formatters/stylish.js';
 
 const genDiff = (filepath1, filepath2) => {
   // получение содержимого файлов в виде строки
@@ -9,33 +10,10 @@ const genDiff = (filepath1, filepath2) => {
   // преобразование полученных строк в объекты с учетом формата файла
   const file1 = parsers(readFile1, getFormat(filepath1));
   const file2 = parsers(readFile2, getFormat(filepath2));
-  // Массив ключей каждого объекта
-  const keys1 = Object.keys(file1);
-  const keys2 = Object.keys(file2);
-  // Объединяем два массива в один без дублирующихся ключей и сортируем его
-  const sortedKeys = _.union(keys1, keys2).sort();
-
-  const newArr = [];
-  sortedKeys.map((key) => {
-    // Если в 1-м файле НЕТ ключа из общего массива
-    if (!Object.hasOwn(file1, key)) {
-      newArr.push(`  + ${key}: ${file2[key]}`);
-      // Если во 2-м файле НЕТ ключа из общего массива
-    } else if (!Object.hasOwn(file2, key)) {
-      newArr.push(`  - ${key}: ${file1[key]}`);
-      // Если значение ключа в 1-м файле НЕ равно значению ключа из 2-го файла
-    } else if (file1[key] !== file2[key]) {
-      newArr.push(`  - ${key}: ${file1[key]}`);
-      newArr.push(`  + ${key}: ${file2[key]}`);
-    } else {
-      // Если ключи и их значения равны и они присутствуют в обоих файлах
-      newArr.push(`    ${key}: ${file1[key]}`);
-    }
-
-    return null;
-  });
-  // Полученный массив мы форматируем в строку нужного вида
-  return ['{', ...newArr, '}'].join('\n');
+  // генерация массива объектов, описывающих различия в двух исходных объектах
+  const tree = genTree(file1, file2);
+  // Полученный массив объектов форматируем в нужного вида строку
+  return stylish(tree);
 };
 
 export default genDiff;
