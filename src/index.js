@@ -1,9 +1,9 @@
 import { readFile, getFormat } from './utils.js';
 import parsers from './parsers.js';
 import genTree from './genTree.js';
-import stylish from './formatters/stylish.js';
+import format from './formatters/index.js';
 
-const genDiff = (filepath1, filepath2, format) => {
+const genDiff = (filepath1, filepath2, formatName) => {
   // получение содержимого файлов в виде строки
   const readFile1 = readFile(filepath1);
   const readFile2 = readFile(filepath2);
@@ -13,7 +13,7 @@ const genDiff = (filepath1, filepath2, format) => {
   // генерация массива объектов, описывающих различия в двух исходных объектах
   const tree = genTree(file1, file2);
   // Полученный массив объектов форматируем в нужного вида строку
-  return stylish(tree);
+  return format(tree, formatName);
 };
 
 export default genDiff;
