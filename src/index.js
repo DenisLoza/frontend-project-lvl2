@@ -3,7 +3,7 @@ import parsers from './parsers.js';
 import genTree from './genTree.js';
 import stylish from './formatters/stylish.js';
 
-const genDiff = (filepath1, filepath2) => {
+const genDiff = (filepath1, filepath2, format) => {
   // получение содержимого файлов в виде строки
   const readFile1 = readFile(filepath1);
   const readFile2 = readFile(filepath2);
