@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Hexlet Frontend project level 2",
   "type": "module",
-  "main": "bin/gendiff.js",
+  "main": "src/index.js",
   "scripts": {
     "test": "jest"
   },
