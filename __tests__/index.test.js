@@ -28,3 +28,8 @@ test('gendiff json .json test', () => {
 test('gendiff json .yml and .yaml test', () => {
   expect(genDiff('file1.yml', 'file2.yaml', 'json')).toEqual(expectedJsonOutput);
 });
+
+test('format check for invalid value', () => {
+  const result = genDiff('file1.json', 'file2.json', 'invalidFormat');
+  expect(result).toBeNull();
+});
