@@ -5,6 +5,14 @@ const expectedStylishOutput = readFile('stylishOutput.txt');
 const expectedPlainOutput = readFile('plainOutput.txt');
 const expectedJsonOutput = readFile('jsonOutput.txt');
 
+test('gendiff .json test', () => {
+  expect(genDiff('file1.json', 'file2.json')).toEqual(expectedStylishOutput);
+});
+
+test('gendiff .yml and .yaml test', () => {
+  expect(genDiff('file1.yml', 'file2.yaml')).toEqual(expectedStylishOutput);
+});
+
 test('gendiff stylish .json test', () => {
   expect(genDiff('file1.json', 'file2.json', 'stylish')).toEqual(expectedStylishOutput);
 });
