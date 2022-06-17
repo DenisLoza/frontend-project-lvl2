@@ -29,7 +29,11 @@ test('gendiff json .yml and .yaml test', () => {
   expect(genDiff('file1.yml', 'file2.yaml', 'json')).toEqual(expectedJsonOutput);
 });
 
-test('format check for invalid value', () => {
+test('format check for invalid value test', () => {
   const result = genDiff('file1.json', 'file2.json', 'invalidFormat');
   expect(result).toBeNull();
+});
+
+test('wrong formats of files test', () => {
+  expect(() => genDiff('file1.txt', 'file2.txt')).toThrow();
 });
