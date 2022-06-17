@@ -3,6 +3,7 @@ import genDiff from '../src/index.js';
 
 const expectedStylishOutput = readFile('stylishOutput.txt');
 const expectedPlainOutput = readFile('plainOutput.txt');
+const expectedJsonOutput = readFile('jsonOutput.txt');
 
 test('gendiff stylish .json test', () => {
   expect(genDiff('file1.json', 'file2.json', 'stylish')).toEqual(expectedStylishOutput);
@@ -18,4 +19,12 @@ test('gendiff plain .json test', () => {
 
 test('gendiff plain .yml and .yaml test', () => {
   expect(genDiff('file1.yml', 'file2.yaml', 'plain')).toEqual(expectedPlainOutput);
+});
+
+test('gendiff json .json test', () => {
+  expect(genDiff('file1.json', 'file2.json', 'json')).toEqual(expectedJsonOutput);
+});
+
+test('gendiff json .yml and .yaml test', () => {
+  expect(genDiff('file1.yml', 'file2.yaml', 'json')).toEqual(expectedJsonOutput);
 });

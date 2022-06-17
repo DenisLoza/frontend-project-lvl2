@@ -1,5 +1,6 @@
 import stylish from './stylish.js';
 import plain from './plain.js';
+import json from './json.js';
 
 // Функция отправляет diff-дерево на форматирование согласно formatName
 const format = (tree, formatName) => {
@@ -9,6 +10,9 @@ const format = (tree, formatName) => {
     }
     case 'plain': {
       return plain(tree);
+    }
+    case 'json': {
+      return json(tree);
     }
     default:
       throw new Error(`Unknown format to generate a tree: '${formatName}'!`);

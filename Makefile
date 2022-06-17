@@ -15,3 +15,6 @@ test: # выполняет тесты Jest
 
 test-coverage: # отображает в ком.строке процент покрытия тестами
 	npm test -- --coverage --coverageProvider=v8
+
+test-watch: # тесты в режиме наблюдения с доп. параметрами
+	npm test -- --watchAll

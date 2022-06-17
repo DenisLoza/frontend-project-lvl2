@@ -70,3 +70,6 @@ make test-coverage
 
 ### display gendiff plain output format function work with nested files (.json, .yml, .yaml)
 [![asciicast](https://asciinema.org/a/OKOQR6GMk3cNGwaJNVLxPICBy.svg)](https://asciinema.org/a/OKOQR6GMk3cNGwaJNVLxPICBy)
+
+### display gendiff JSON output format function work with nested files (.json, .yml, .yaml)
+[![asciicast](https://asciinema.org/a/V0BD2dguGw5xLFLGcennyans6.svg)](https://asciinema.org/a/V0BD2dguGw5xLFLGcennyans6)
