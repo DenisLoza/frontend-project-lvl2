@@ -1,19 +1,19 @@
 import _ from 'lodash';
 
-const genTree = (file1, file2) => {
+const genTree = (data1, data2) => {
   // Массив ключей каждого объекта
-  const keys1 = Object.keys(file1);
-  const keys2 = Object.keys(file2);
+  const keys1 = Object.keys(data1);
+  const keys2 = Object.keys(data2);
   // Объединяем два массива в один без дублирующихся ключей и сортируем его
-  const sortedKeys = _.union(keys1, keys2).sort();
+  const sortedKeys = _.sortBy(_.union(keys1, keys2));
 
   const result = sortedKeys.map((key) => {
     // Извлекаем значение (св-во) каждого ключа для каждого из массивов объектов
-    const value1 = file1[key];
-    const value2 = file2[key];
+    const value1 = data1[key];
+    const value2 = data2[key];
     // Если оба значения ключей являются объектами
     // рекурсивно вызываем ф-цию genTree передавая ей значения ключей
-    if (typeof (value1) === 'object' && typeof (value2) === 'object') {
+    if (_.isPlainObject(value1) && _.isPlainObject(value2)) {
       return {
         key,
         type: 'nested',
@@ -21,7 +21,7 @@ const genTree = (file1, file2) => {
       };
     }
     // Если текущего ключа НЕТ в файле2
-    if (!Object.hasOwn(file2, key)) {
+    if (!_.has(data2, key)) {
       return {
         key,
         type: 'deleted',
@@ -29,7 +29,7 @@ const genTree = (file1, file2) => {
       };
     }
     // Если текущего ключа НЕТ в файле1
-    if (!Object.hasOwn(file1, key)) {
+    if (!_.has(data1, key)) {
       return {
         key,
         type: 'added',
@@ -37,7 +37,7 @@ const genTree = (file1, file2) => {
       };
     }
     // Если значение текущего ключа НЕ равны значениям в файле1 и файле2
-    if (value1 !== value2) {
+    if (!_.isEqual(value1, value2)) {
       return {
         key,
         type: 'changed',
