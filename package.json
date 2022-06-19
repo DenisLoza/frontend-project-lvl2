@@ -4,6 +4,9 @@
   "description": "Hexlet Frontend project level 2",
   "type": "module",
   "main": "src/index.js",
+  "bin": {
+    "gendiff": "bin/gendiff.js"
+  },
   "scripts": {
     "test": "jest"
   },
