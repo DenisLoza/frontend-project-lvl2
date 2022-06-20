@@ -11,7 +11,6 @@ const genDiff = (filepath1, filepath2, formatName = 'stylish') => {
   // преобразование полученных строк в объекты с учетом формата файла
   const file1 = parsers(readFile1, extname(filepath1));
   const file2 = parsers(readFile2, extname(filepath2));
-  console.log(extname(filepath1));
   // генерация массива объектов, описывающих различия в двух исходных объектах
   const tree = genTree(file1, file2);
   // Полученный массив объектов форматируем в нужного вида строку
