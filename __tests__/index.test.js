@@ -1,40 +1,32 @@
-import { readFile } from '../src/utils.js';
-import genDiff from '../src/index.js';
+import { dirname, resolve } from 'path';
+import { readFileSync } from 'fs';
+import { fileURLToPath } from 'url';
+import genDiff from '../index';
+
+// получение абсолютного пути к текущему файлу
+const __filename = fileURLToPath(import.meta.url);
+// // получение абсолютного пути к текущему каталогу
+const __dirname = dirname(__filename);
+// // получаем полный относительный путь к файлу с учетом папки "_fixtures_"
+// // и передаваемого имени файла.
+const getFixturePath = (filename) => resolve(__dirname, '..', '__fixtures__', filename);
+// // получаем данные(в виде строки) из файла по указанному пути
+const readFile = (filename) => readFileSync(getFixturePath(filename), 'utf-8');
 
 const expectedStylishOutput = readFile('stylishOutput.txt');
 const expectedPlainOutput = readFile('plainOutput.txt');
 const expectedJsonOutput = readFile('jsonOutput.txt');
 
-test('gendiff .json test', () => {
-  expect(genDiff('file1.json', 'file2.json')).toEqual(expectedStylishOutput);
-});
+const formats = ['json', 'yml', 'yaml'];
 
-test('gendiff .yml and .yaml test', () => {
-  expect(genDiff('file1.yml', 'file2.yaml')).toEqual(expectedStylishOutput);
-});
+test.each(formats)('different formats of files (.json, .yml, .yaml) & output styles', (format) => {
+  const fileName1 = `file1.${format}`;
+  const fileName2 = `file2.${format}`;
 
-test('gendiff stylish .json test', () => {
-  expect(genDiff('file1.json', 'file2.json', 'stylish')).toEqual(expectedStylishOutput);
-});
-
-test('gendiff stylish .yml and .yaml test', () => {
-  expect(genDiff('file1.yml', 'file2.yaml', 'stylish')).toEqual(expectedStylishOutput);
-});
-
-test('gendiff plain .json test', () => {
-  expect(genDiff('file1.json', 'file2.json', 'plain')).toEqual(expectedPlainOutput);
-});
-
-test('gendiff plain .yml and .yaml test', () => {
-  expect(genDiff('file1.yml', 'file2.yaml', 'plain')).toEqual(expectedPlainOutput);
-});
-
-test('gendiff json .json test', () => {
-  expect(genDiff('file1.json', 'file2.json', 'json')).toEqual(expectedJsonOutput);
-});
-
-test('gendiff json .yml and .yaml test', () => {
-  expect(genDiff('file1.yml', 'file2.yaml', 'json')).toEqual(expectedJsonOutput);
+  expect(genDiff(fileName1, fileName2)).toEqual(expectedStylishOutput);
+  expect(genDiff(fileName1, fileName2, 'stylish')).toEqual(expectedStylishOutput);
+  expect(genDiff(fileName1, fileName2, 'plain')).toEqual(expectedPlainOutput);
+  expect(genDiff(fileName1, fileName2, 'json')).toEqual(expectedJsonOutput);
 });
 
 test('format check for invalid value test', () => {
