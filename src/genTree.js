@@ -8,16 +8,12 @@ const genTree = (data1, data2) => {
   const sortedKeys = _.sortBy(_.union(keys1, keys2));
 
   const result = sortedKeys.map((key) => {
-    // Извлекаем значение (св-во) каждого ключа для каждого из массивов объектов
-    const value1 = data1[key];
-    const value2 = data2[key];
-
     // Если текущего ключа НЕТ в файле1
     if (!_.has(data1, key)) {
       return {
         key,
         type: 'added',
-        value: value2,
+        value: data2[key],
       };
     }
     // Если текущего ключа НЕТ в файле2
@@ -25,32 +21,32 @@ const genTree = (data1, data2) => {
       return {
         key,
         type: 'removed',
-        value: value1,
+        value: data1[key],
       };
     }
     // Если оба значения ключей являются объектами
     // рекурсивно вызываем ф-цию genTree передавая ей значения ключей
-    if (_.isPlainObject(value1) && _.isPlainObject(value2)) {
+    if (_.isPlainObject(data1[key]) && _.isPlainObject(data2[key])) {
       return {
         key,
         type: 'nested',
-        children: genTree(value1, value2),
+        children: genTree(data1[key], data2[key]),
       };
     }
-    // Если значение текущего ключа НЕ равны значениям в файле1 и файле2
-    if (!_.isEqual(value1, value2)) {
+    // Если значения текущего ключа НЕ равны друг другу (значениям в файле1 и файле2)
+    if (!_.isEqual(data1[key], data2[key])) {
       return {
         key,
         type: 'updated',
-        removedValue: value1,
-        addedValue: value2,
+        removedValue: data1[key],
+        addedValue: data2[key],
       };
     }
     // Если значение текущего ключа НЕ изменилось
     return {
       key,
       type: 'unchanged',
-      value: value1,
+      value: data1[key],
     };
   });
 
