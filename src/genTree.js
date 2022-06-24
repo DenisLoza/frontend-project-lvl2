@@ -1,11 +1,9 @@
 import _ from 'lodash';
 
 const genTree = (data1, data2) => {
-  // Массив ключей каждого объекта
-  const keys1 = Object.keys(data1);
-  const keys2 = Object.keys(data2);
+  // _.keys(data) - Массив ключей каждого объекта
   // Объединяем два массива в один без дублирующихся ключей и сортируем его
-  const sortedKeys = _.sortBy(_.union(keys1, keys2));
+  const sortedKeys = _.sortBy(_.union(_.keys(data1), _.keys(data2)));
 
   const result = sortedKeys.map((key) => {
     // Если текущего ключа НЕТ в файле1
