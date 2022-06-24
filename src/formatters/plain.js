@@ -22,16 +22,16 @@ const buildTree = (node) => {
 
     switch (type) {
       case 'nested': {
-        return children.map((child) => iter(child, `${acc}${key}.`)).join('\n');
+        return children.map((child) => iter(child, `${acc}${key}.`)).join('');
       }
       case 'removed': {
-        return `Property '${acc}${key}' was ${type}`;
+        return `\nProperty '${acc}${key}' was ${type}`;
       }
       case 'added': {
-        return `Property '${acc}${key}' was ${type} with value: ${stringify(value)}`;
+        return `\nProperty '${acc}${key}' was ${type} with value: ${stringify(value)}`;
       }
       case 'updated': {
-        return `Property '${acc}${key}' was ${type}. From ${stringify(removedValue)} to ${stringify(addedValue)}`;
+        return `\nProperty '${acc}${key}' was ${type}. From ${stringify(removedValue)} to ${stringify(addedValue)}`;
       }
       case 'unchanged': {
         return '';
@@ -46,7 +46,7 @@ const buildTree = (node) => {
 
 const plain = (tree) => {
   const result = tree.map(buildTree);
-  return result.reduce((resultStr, node) => `${resultStr}\n${node}`.replaceAll('\n\n', '\n'));
+  return result.join('').replace(/^[\s\uFEFF\xA0]+|[\s\uFEFF\xA0]+$/g, '');
 };
 
 export default plain;
