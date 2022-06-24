@@ -11,6 +11,23 @@ const genTree = (data1, data2) => {
     // Извлекаем значение (св-во) каждого ключа для каждого из массивов объектов
     const value1 = data1[key];
     const value2 = data2[key];
+
+    // Если текущего ключа НЕТ в файле1
+    if (!_.has(data1, key)) {
+      return {
+        key,
+        type: 'added',
+        value: value2,
+      };
+    }
+    // Если текущего ключа НЕТ в файле2
+    if (!_.has(data2, key)) {
+      return {
+        key,
+        type: 'removed',
+        value: value1,
+      };
+    }
     // Если оба значения ключей являются объектами
     // рекурсивно вызываем ф-цию genTree передавая ей значения ключей
     if (_.isPlainObject(value1) && _.isPlainObject(value2)) {
@@ -20,27 +37,11 @@ const genTree = (data1, data2) => {
         children: genTree(value1, value2),
       };
     }
-    // Если текущего ключа НЕТ в файле2
-    if (!_.has(data2, key)) {
-      return {
-        key,
-        type: 'deleted',
-        value: value1,
-      };
-    }
-    // Если текущего ключа НЕТ в файле1
-    if (!_.has(data1, key)) {
-      return {
-        key,
-        type: 'added',
-        value: value2,
-      };
-    }
     // Если значение текущего ключа НЕ равны значениям в файле1 и файле2
     if (!_.isEqual(value1, value2)) {
       return {
         key,
-        type: 'changed',
+        type: 'updated',
         removedValue: value1,
         addedValue: value2,
       };

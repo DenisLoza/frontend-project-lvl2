@@ -30,8 +30,8 @@ test.each(formats)('different formats of files (.json, .yml, .yaml) & output sty
 });
 
 test('format check for invalid value test', () => {
-  const result = genDiff('file1.json', 'file2.json', 'invalidFormat');
-  expect(result).toBeNull();
+  const formatName = 'invalidFormat';
+  expect(() => genDiff('file1.json', 'file2.json', 'invalidFormat')).toThrow(`Unknown format to generate a tree: '${formatName}'!`);
 });
 
 test('wrong formats of files test', () => {

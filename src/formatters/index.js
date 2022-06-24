@@ -15,7 +15,7 @@ const format = (tree, formatName) => {
       return json(tree);
     }
     default:
-      return null;
+      throw new Error(`Unknown format to generate a tree: '${formatName}'!`);
   }
 };
 

@@ -1,10 +1,12 @@
+import _ from 'lodash';
+
 const stringify = (value) => {
   // если value (значение ключа объекта) объект, то верни строку '[complex value]'
-  if (value instanceof Object) {
+  if (_.isObject(value)) {
     return '[complex value]';
   }
   // если value НЕ объект, то верни строку 'value'
-  return typeof (value) === 'string' ? `'${value}'` : value;
+  return typeof (value) === 'string' ? `'${value}'` : String(value);
 };
 
 const buildTree = (node) => {
@@ -20,22 +22,22 @@ const buildTree = (node) => {
 
     switch (type) {
       case 'nested': {
-        return children.map((child) => iter(child, `${acc}${key}.`)).join('');
+        return children.map((child) => iter(child, `${acc}${key}.`)).join('\n');
       }
-      case 'deleted': {
-        return `\nProperty '${acc}${key}' was removed`;
+      case 'removed': {
+        return `Property '${acc}${key}' was ${type}`;
       }
       case 'added': {
-        return `\nProperty '${acc}${key}' was added with value: ${stringify(value)}`;
+        return `Property '${acc}${key}' was ${type} with value: ${stringify(value)}`;
       }
-      case 'changed': {
-        return `\nProperty '${acc}${key}' was updated. From ${stringify(removedValue)} to ${stringify(addedValue)}`;
+      case 'updated': {
+        return `Property '${acc}${key}' was ${type}. From ${stringify(removedValue)} to ${stringify(addedValue)}`;
       }
       case 'unchanged': {
         return '';
       }
       default:
-        return null;
+        throw new Error(`Unknown type: '${type}' of node!`);
     }
   };
 
@@ -43,9 +45,8 @@ const buildTree = (node) => {
 };
 
 const plain = (tree) => {
-  const result = tree.map((node) => buildTree(node));
-
-  return result.join('').replace(/^[\s\uFEFF\xA0]+|[\s\uFEFF\xA0]+$/g, '');
+  const result = tree.map(buildTree);
+  return result.reduce((resultStr, node) => `${resultStr}\n${node}`.replaceAll('\n\n', '\n'));
 };
 
 export default plain;

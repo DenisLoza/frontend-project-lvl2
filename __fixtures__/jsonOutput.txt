@@ -15,12 +15,12 @@
       },
       {
         "key": "setting2",
-        "type": "deleted",
+        "type": "removed",
         "value": 200
       },
       {
         "key": "setting3",
-        "type": "changed",
+        "type": "updated",
         "removedValue": true,
         "addedValue": null
       },
@@ -46,7 +46,7 @@
             "children": [
               {
                 "key": "wow",
-                "type": "changed",
+                "type": "updated",
                 "removedValue": "",
                 "addedValue": "so much"
               }
@@ -72,7 +72,7 @@
     "children": [
       {
         "key": "baz",
-        "type": "changed",
+        "type": "updated",
         "removedValue": "bas",
         "addedValue": "bars"
       },
@@ -83,7 +83,7 @@
       },
       {
         "key": "nest",
-        "type": "changed",
+        "type": "updated",
         "removedValue": {
           "key": "value"
         },
@@ -93,7 +93,7 @@
   },
   {
     "key": "group2",
-    "type": "deleted",
+    "type": "removed",
     "value": {
       "abc": 12345,
       "deep": {
