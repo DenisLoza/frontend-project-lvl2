@@ -1,13 +1,11 @@
-import { extname, dirname, resolve } from 'path';
-import { fileURLToPath } from 'url';
+import { extname, resolve } from 'path';
 import { readFileSync } from 'fs';
 import parsers from './parsers.js';
 import genTree from './genTree.js';
 import format from './formatters/index.js';
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
-const getFixturePathToFile = (filename) => resolve(__dirname, '..', '__fixtures__', filename);
+const getExtension = (filename) => extname(filename).slice(1);
+const getFixturePathToFile = (filename) => resolve(process.cwd(), filename);
 const readFile = (filename) => readFileSync(getFixturePathToFile(filename), 'utf-8');
 
 const genDiff = (filepath1, filepath2, formatName = 'stylish') => {
@@ -15,8 +13,8 @@ const genDiff = (filepath1, filepath2, formatName = 'stylish') => {
   const readFile1 = readFile(filepath1);
   const readFile2 = readFile(filepath2);
   // преобразование полученных строк в объекты с учетом формата файла (без точки)
-  const file1 = parsers(readFile1, extname(filepath1).slice(1));
-  const file2 = parsers(readFile2, extname(filepath2).slice(1));
+  const file1 = parsers(readFile1, getExtension(filepath1));
+  const file2 = parsers(readFile2, getExtension(filepath2));
   // генерация массива объектов, описывающих различия в двух исходных объектах
   const tree = genTree(file1, file2);
   // Полученный массив объектов форматируем в нужного вида строку

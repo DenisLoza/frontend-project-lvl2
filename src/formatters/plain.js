@@ -2,7 +2,9 @@ import _ from 'lodash';
 
 const stringify = (value) => {
   // если value (значение ключа объекта) объект, то верни строку '[complex value]'
-  if (_.isObject(value)) return '[complex value]';
+  if (_.isObject(value)) {
+    return '[complex value]';
+  }
   // если value НЕ объект, то верни строку 'value'
   return typeof (value) === 'string' ? `'${value}'` : String(value);
 };

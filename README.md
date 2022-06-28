@@ -41,6 +41,14 @@ Options:
   -f, --format <type>  output format
   -h, --help           output usage information  
 ```
+
+Сall example to compare files from tests folder
+(output format PLAIN):
+
+```sh
+gendiff -f plain __fixtures__/file1.json __fixtures__/file2.json
+```
+
 ### 🧪 Tests & Coverage
 
 1) Run linter:

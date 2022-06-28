@@ -38,28 +38,24 @@ const stylish = (currentValue, depth = 1) => {
 
     switch (line.type) {
       case 'added':
-        return [`${indents.openBracket}+ ${line.key}: ${makeValue}`];
+        return `${indents.openBracket}+ ${line.key}: ${makeValue}`;
       case 'removed':
-        return [`${indents.openBracket}- ${line.key}: ${makeValue}`];
+        return `${indents.openBracket}- ${line.key}: ${makeValue}`;
       case 'updated':
-        return [
-          `${indents.openBracket}- ${line.key}: ${stringify(
-            line.removedValue,
-            depth + 1,
-          )}\n${indents.openBracket}+ ${line.key}: ${stringify(
-            line.addedValue,
-            depth + 1,
-          )}`,
-        ].join('\n');
+        return `${indents.openBracket}- ${line.key}: ${stringify(
+          line.removedValue,
+          depth + 1,
+        )}\n${indents.openBracket}+ ${line.key}: ${stringify(
+          line.addedValue,
+          depth + 1,
+        )}`;
       case 'unchanged':
-        return [`${indents.openBracket}  ${line.key}: ${makeValue}`];
+        return `${indents.openBracket}  ${line.key}: ${makeValue}`;
       case 'nested':
-        return [
-          `${indents.openBracket}  ${line.key}: ${stylish(
-            line.children,
-            depth + 1,
-          )}`,
-        ];
+        return `${indents.openBracket}  ${line.key}: ${stylish(
+          line.children,
+          depth + 1,
+        )}`;
       default:
         throw new Error(`Unknown type: '${line.type}'`);
     }
