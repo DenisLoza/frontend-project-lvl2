@@ -42,7 +42,7 @@ test('additional parameter format is invalid test', () => {
   const file1 = parsers(readFile('file1.json'), 'json');
   const file2 = parsers(readFile('file2.json'), 'json');
 
-  expect(() => format(genTree(file1, file2), 'invalidParameter')).toThrow(`Unknown format to generate a tree: '${formatName}'!`);
+  expect(() => format(genTree(file1, file2), formatName)).toThrow(`Unknown format to generate a tree: '${formatName}'!`);
 });
 
 test('wrong formats of files test', () => {
